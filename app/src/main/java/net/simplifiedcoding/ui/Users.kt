@@ -37,7 +37,9 @@ fun UserList(viewModel: MainViewModel) {
 
     LazyColumn {
         items(usersList) { item ->
-            item?.let { UserCard(user = it) }
+            item?.let {
+                UserCard(user = it)
+            }
         }
 
         when (usersList.loadState.append) {

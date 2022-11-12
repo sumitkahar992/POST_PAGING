@@ -11,7 +11,10 @@ import retrofit2.http.Query
 interface UsersApi {
 
     @GET("user")
-    suspend fun getUsers(@Query("page") page: Int, @Query("limit") limit: Int): UsersResponse
+    suspend fun getUsers(
+        @Query("page") page: Int,
+        @Query("limit") limit: Int
+    ): UsersResponse
 
 
     companion object {
@@ -31,8 +34,9 @@ interface UsersApi {
             return OkHttpClient.Builder()
                 .addInterceptor { chain ->
                     chain.proceed(chain.request().newBuilder().also {
-                        it.addHeader("Accept", "application/json")
-                        it.addHeader("app-id", "62cceaafb592b449c3aad899")
+//                        it.addHeader("Accept", "application/json")
+//                        it.addHeader("REject", "application/XML")
+                        it.addHeader("app-id", "6363f81bcf8f4e1521623233")
                     }.build())
                 }.also { client ->
                     if (BuildConfig.DEBUG) {

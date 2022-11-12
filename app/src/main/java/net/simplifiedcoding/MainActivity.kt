@@ -4,14 +4,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import net.simplifiedcoding.post_api.MyApp
 import net.simplifiedcoding.ui.MainViewModel
 import net.simplifiedcoding.ui.UserList
-import net.simplifiedcoding.ui.theme.PagingSampleTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -21,15 +22,65 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PagingSampleTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    UserList(viewModel = viewModel)
-                }
-            }
+
+            val navController = rememberNavController()
+            NavGraph(navController, viewModel )
         }
     }
 }
+
+
+sealed class Screen(val route : String){
+    object UserScreen : Screen(route = "user_screen")
+    object MyApp : Screen(route = "my_app")
+}
+
+
+@Composable
+fun NavGraph(
+    navController : NavHostController,
+    viewModel: MainViewModel
+) {
+
+    NavHost(
+        navController = navController,
+        startDestination = Screen.MyApp.route
+    ) {
+
+        composable(Screen.MyApp.route) {
+            MyApp(navController)
+        }
+
+        composable(Screen.UserScreen.route) {
+            UserList(viewModel = viewModel)
+        }
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
