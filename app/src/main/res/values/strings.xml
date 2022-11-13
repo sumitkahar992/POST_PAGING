@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Paging Sample</string>
     <string name="description">user image</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et ullamcorper sem. Pellentesque pulvinar aliquam odio. Fusce faucibus id velit quis fringilla. Etiam eu ante ac neque tincidunt sollicitudin at ut lacus.</string>
 </resources>
